@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>英訳テスト</title>
+    
+        <!-- Apple Web App Fullscreen Support -->
+        <link rel="apple-touch-icon" href="icon.png">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="英訳テスト">
+    
+        <style>
+        body {
+            font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e0f2f7; /* 明るい単色背景 */
+            color: #333;
+            -webkit-text-size-adjust: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            text-shadow: none;
+        }
+        .filter-section {
+            background-color: #f0f8ff; /* 絞り込みセクションの背景色 */
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .filter-section label {
+            font-size: 1.1em;
+            color: #4a4a4a;
+            margin-right: 10px;
+        }
+        .filter-section input[type="number"] {
+            width: 80px;
+            padding: 8px 10px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .filter-section button {
+            padding: 10px 20px;
+            background-color: #2ecc71; /* 緑系の絞り込みボタン */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
+            -webkit-appearance: none;
+        }
+        .filter-section button:active {
+            background-color: #27ae60;
+            box-shadow: 0 1px 4px rgba(46, 204, 113, 0.4);
+            transform: translateY(1px);
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #d0d0d0;
+            border-radius: 12px;
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+        .japanese-text {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #444;
+            font-weight: 500;
+        }
+        .answer-button {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+            -webkit-appearance: none;
+        }
+        .answer-button:active {
+            background-color: #2980b9;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.4);
+            transform: translateY(2px);
+        }
+        .english-answer {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #2c3e50; /* 英語のデフォルト色 */
+            font-weight: 500;
+            display: none;
+            padding: 12px;
+            background-color: #eaf6ff;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>英訳テスト (361-660)</h1>
+
+        <div class="filter-section">
+            <label for="startNum">開始:</label>
+            <input type="number" id="startNum" value="361" min="361" max="660">
+            <label for="endNum">終了:</label>
+            <input type="number" id="endNum" value="660" min="361" max="660">
+            <button onclick="applyFilter()">絞り込む</button>
+        </div>
+
+        <div id="wordList">
+            <div class="question-block" data-number="361">
+                <div class="japanese-text">361. 経済成長を促進する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer361')">答えを見る</button>
+                <div class="english-answer" id="answer361">promote economic growth</div>
+            </div>
+
+            <div class="question-block" data-number="362">
+                <div class="japanese-text">362. 野菜を食べるように彼に忠告する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer362')">答えを見る</button>
+                <div class="english-answer" id="answer362">advise him to eat vegetables</div>
+            </div>
+
+            <div class="question-block" data-number="363">
+                <div class="japanese-text">363. 60歳で仕事を辞める</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer363')">答えを見る</button>
+                <div class="english-answer" id="answer363">retire from work at sixty</div>
+            </div>
+
+            <div class="question-block" data-number="364">
+                <div class="japanese-text">364. 彼に外出することを許す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer364')">答えを見る</button>
+                <div class="english-answer" id="answer364">permit him to go out</div>
+            </div>
+
+            <div class="question-block" data-number="365">
+                <div class="japanese-text">365. あなたにこの本を薦める</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer365')">答えを見る</button>
+                <div class="english-answer" id="answer365">recommend this book to you</div>
+            </div>
+
+            <div class="question-block" data-number="366">
+                <div class="japanese-text">366. 遅れたことを彼に謝る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer366')">答えを見る</button>
+                <div class="english-answer" id="answer366">apologize to him for being late</div>
+            </div>
+
+            <div class="question-block" data-number="367">
+                <div class="japanese-text">367. 息子の成功を彼に知らせる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer367')">答えを見る</button>
+                <div class="english-answer" id="answer367">inform him of his son's success</div>
+            </div>
+
+            <div class="question-block" data-number="368">
+                <div class="japanese-text">368. 彼らに結婚に反対する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer368')">答えを見る</button>
+                <div class="english-answer" id="answer368">oppose their marriage</div>
+            </div>
+
+            <div class="question-block" data-number="369">
+                <div class="japanese-text">369. 良い友達を信用する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer369')">答えを見る</button>
+                <div class="english-answer" id="answer369">trust an old friend</div>
+            </div>
+
+            <div class="question-block" data-number="370">
+                <div class="japanese-text">370. 最善の答えを選ぶ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer370')">答えを見る</button>
+                <div class="english-answer" id="answer370">select the best answer</div>
+            </div>
+
+            <div class="question-block" data-number="371">
+                <div class="japanese-text">371. 仕事のことで彼を褒める</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer371')">答えを見る</button>
+                <div class="english-answer" id="answer371">praise him for his work</div>
+            </div>
+
+            <div class="question-block" data-number="372">
+                <div class="japanese-text">372. どう問題に対処すべきか</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer372')">答えを見る</button>
+                <div class="english-answer" id="answer372">how to handle problems</div>
+            </div>
+
+            <div class="question-block" data-number="373">
+                <div class="japanese-text">373. 新しいやり方を提案する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer373')">答えを見る</button>
+                <div class="english-answer" id="answer373">propose a new way</div>
+            </div>
+
+            <div class="question-block" data-number="374">
+                <div class="japanese-text">374. 新鮮な空気を吸い込む</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer374')">答えを見る</button>
+                <div class="english-answer" id="answer374">breathe fresh air</div>
+            </div>
+
+            <div class="question-block" data-number="375">
+                <div class="japanese-text">375. 遅刻したことで彼を非難する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer375')">答えを見る</button>
+                <div class="english-answer" id="answer375">criticize him for being late</div>
+            </div>
+
+            <div class="question-block" data-number="376">
+                <div class="japanese-text">376. 困難に打ち勝つ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer376')">答えを見る</button>
+                <div class="english-answer" id="answer376">overcome difficulties</div>
+            </div>
+
+            <div class="question-block" data-number="377">
+                <div class="japanese-text">377. 大きな力を持っている</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer377')">答えを見る</button>
+                <div class="english-answer" id="answer377">possess great power</div>
+            </div>
+
+            <div class="question-block" data-number="378">
+                <div class="japanese-text">378. 未来を予言する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer378')">答えを見る</button>
+                <div class="english-answer" id="answer378">predict the future</div>
+            </div>
+
+            <div class="question-block" data-number="379">
+                <div class="japanese-text">379. 本を出版する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer379')">答えを見る</button>
+                <div class="english-answer" id="answer379">publish a book</div>
+            </div>
+
+            <div class="question-block" data-number="380">
+                <div class="japanese-text">380. 川面に浮かぶ木の葉</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer380')">答えを見る</button>
+                <div class="english-answer" id="answer380">leaves floating on the river</div>
+            </div>
+
+            <div class="question-block" data-number="381">
+                <div class="japanese-text">381. 古き良き時代を思い出す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer381')">答えを見る</button>
+                <div class="english-answer" id="answer381">recall the good old days</div>
+            </div>
+
+            <div class="question-block" data-number="382">
+                <div class="japanese-text">382. アマゾン川を探検する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer382')">答えを見る</button>
+                <div class="english-answer" id="answer382">explore the Amazon River</div>
+            </div>
+
+            <div class="question-block" data-number="383">
+                <div class="japanese-text">383. 眠っているふりをする</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer383')">答えを見る</button>
+                <div class="english-answer" id="answer383">pretend to be asleep</div>
+            </div>
+
+            <div class="question-block" data-number="384">
+                <div class="japanese-text">384. 大量の水を吸収する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer384')">答えを見る</button>
+                <div class="english-answer" id="answer384">absorb a lot of water</div>
+            </div>
+
+            <div class="question-block" data-number="385">
+                <div class="japanese-text">385. 彼は父親に似ている</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer385')">答えを見る</button>
+                <div class="english-answer" id="answer385">He resembles his father.</div>
+            </div>
+
+            <div class="question-block" data-number="386">
+                <div class="japanese-text">386. ずたずたに手紙を引き裂く</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer386')">答えを見る</button>
+                <div class="english-answer" id="answer386">tear the letter to pieces</div>
+            </div>
+
+            <div class="question-block" data-number="387">
+                <div class="japanese-text">387. 多量のエネルギーを消費する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer387')">答えを見る</button>
+                <div class="english-answer" id="answer387">consume a lot of energy</div>
+            </div>
+
+            <div class="question-block" data-number="388">
+                <div class="japanese-text">388. 金メダルを目指して彼と競争する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer388')">答えを見る</button>
+                <div class="english-answer" id="answer388">compete with him for the gold medal</div>
+            </div>
+
+            <div class="question-block" data-number="389">
+                <div class="japanese-text">389. タバコをやめる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer389')">答えを見る</button>
+                <div class="english-answer" id="answer389">quit smoking</div>
+            </div>
+
+            <div class="question-block" data-number="390">
+                <div class="japanese-text">390. 新しい計画を発表する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer390')">答えを見る</button>
+                <div class="english-answer" id="answer390">announce a new plan</div>
+            </div>
+
+            <div class="question-block" data-number="391">
+                <div class="japanese-text">391. 光にすばやく反応する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer391')">答えを見る</button>
+                <div class="english-answer" id="answer391">react quickly to light</div>
+            </div>
+
+            <div class="question-block" data-number="392">
+                <div class="japanese-text">392. 街を歩き回る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer392')">答えを見る</button>
+                <div class="english-answer" id="answer392">wander around the streets</div>
+            </div>
+
+            <div class="question-block" data-number="393">
+                <div class="japanese-text">393. 運転中にメールを送るな</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer393')">答えを見る</button>
+                <div class="english-answer" id="answer393">Don't text while driving</div>
+            </div>
+
+            <div class="question-block" data-number="394">
+                <div class="japanese-text">394. 電力を生み出す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer394')">答えを見る</button>
+                <div class="english-answer" id="answer394">generate electricity</div>
+            </div>
+
+            <div class="question-block" data-number="395">
+                <div class="japanese-text">395. 10点を取る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer395')">答えを見る</button>
+                <div class="english-answer" id="answer395">score 10 goals</div>
+            </div>
+
+            <div class="question-block" data-number="396">
+                <div class="japanese-text">396. 日本政府</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer396')">答えを見る</button>
+                <div class="english-answer" id="answer396">the Japanese government</div>
+            </div>
+
+            <div class="question-block" data-number="397">
+                <div class="japanese-text">397. 英語の知識がほとんどない</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer397')">答えを見る</button>
+                <div class="english-answer" id="answer397">have little knowledge of English</div>
+            </div>
+
+            <div class="question-block" data-number="398">
+                <div class="japanese-text">398. アジアの諸国</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer398')">答えを見る</button>
+                <div class="english-answer" id="answer398">the Asian nations</div>
+            </div>
+
+            <div class="question-block" data-number="399">
+                <div class="japanese-text">399. 彼を助けようと努力する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer399')">答えを見る</button>
+                <div class="english-answer" id="answer399">make an effort to help him</div>
+            </div>
+
+            <div class="question-block" data-number="400">
+                <div class="japanese-text">400. 冷戦時代</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer400')">答えを見る</button>
+                <div class="english-answer" id="answer400">the Cold War period</div>
+            </div>
+
+            <div class="question-block" data-number="401">
+                <div class="japanese-text">401. 人口の増加</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer401')">答えを見る</button>
+                <div class="english-answer" id="answer401">population growth</div>
+            </div>
+
+            <div class="question-block" data-number="402">
+                <div class="japanese-text">402. 平均的な目的で</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer402')">答えを見る</button>
+                <div class="english-answer" id="answer402">for peaceful purposes</div>
+            </div>
+
+            <div class="question-block" data-number="403">
+                <div class="japanese-text">403. 人間の行動を研究する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer403')">答えを見る</button>
+                <div class="english-answer" id="answer403">study human behavior</div>
+            </div>
+
+            <div class="question-block" data-number="404">
+                <div class="japanese-text">404. 食糧不足</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer404')">答えを見る</button>
+                <div class="english-answer" id="answer404">lack of food</div>
+            </div>
+
+            <div class="question-block" data-number="405">
+                <div class="japanese-text">405. 基本的な技術を学ぶ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer405')">答えを見る</button>
+                <div class="english-answer" id="answer405">learn basic skills</div>
+            </div>
+
+            <div class="question-block" data-number="406">
+                <div class="japanese-text">406. CDの音質</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer406')">答えを見る</button>
+                <div class="english-answer" id="answer406">the sound quality of the CD</div>
+            </div>
+
+            <div class="question-block" data-number="407">
+                <div class="japanese-text">407. 自然環境</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer407')">答えを見る</button>
+                <div class="english-answer" id="answer407">the natural environment</div>
+            </div>
+
+            <div class="question-block" data-number="408">
+                <div class="japanese-text">408. 重要な役割を果たす</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer408')">答えを見る</button>
+                <div class="english-answer" id="answer408">play an important role</div>
+            </div>
+
+            <div class="question-block" data-number="409">
+                <div class="japanese-text">409. 人生に対する前向きな態度</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer409')">答えを見る</button>
+                <div class="english-answer" id="answer409">a positive attitude toward life</div>
+            </div>
+
+            <div class="question-block" data-number="410">
+                <div class="japanese-text">410. この文章の筆者</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer410')">答えを見る</button>
+                <div class="english-answer" id="answer410">the author of this passage</div>
+            </div>
+
+            <div class="question-block" data-number="411">
+                <div class="japanese-text">411. 科学的な研究</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer411')">答えを見る</button>
+                <div class="english-answer" id="answer411">scientific research</div>
+            </div>
+
+            <div class="question-block" data-number="412">
+                <div class="japanese-text">412. 彼女と話す機会</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer412')">答えを見る</button>
+                <div class="english-answer" id="answer412">an opportunity to talk to her</div>
+            </div>
+
+            <div class="question-block" data-number="413">
+                <div class="japanese-text">413. 情報源</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer413')">答えを見る</button>
+                <div class="english-answer" id="answer413">a source of information</div>
+            </div>
+
+            <div class="question-block" data-number="414">
+                <div class="japanese-text">414. 二酸化炭素</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer414')">答えを見る</button>
+                <div class="english-answer" id="answer414">carbon dioxide</div>
+            </div>
+
+            <div class="question-block" data-number="415">
+                <div class="japanese-text">415. 彼女の鼻の形</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer415')">答えを見る</button>
+                <div class="english-answer" id="answer415">the shape of her nose</div>
+            </div>
+
+            <div class="question-block" data-number="416">
+                <div class="japanese-text">416. 会員の利点</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer416')">答えを見る</button>
+                <div class="english-answer" id="answer416">the advantage of membership</div>
+            </div>
+
+            <div class="question-block" data-number="417">
+                <div class="japanese-text">417. 英語を教える方法</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer417')">答えを見る</button>
+                <div class="english-answer" id="answer417">a method of teaching English</div>
+            </div>
+
+            <div class="question-block" data-number="418">
+                <div class="japanese-text">418. ベッドで本を読む習慣がある</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer418')">答えを見る</button>
+                <div class="english-answer" id="answer418">be in the habit of reading in bed</div>
+            </div>
+
+            <div class="question-block" data-number="419">
+                <div class="japanese-text">419. 話を細部まで覚えている</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer419')">答えを見る</button>
+                <div class="english-answer" id="answer419">remember the details of the story</div>
+            </div>
+
+            <div class="question-block" data-number="420">
+                <div class="japanese-text">420. 私の家から歩ける距離で</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer420')">答えを見る</button>
+                <div class="english-answer" id="answer420">within walking distance of my house</div>
+            </div>
+
+            <div class="question-block" data-number="421">
+                <div class="japanese-text">421. 大群集が集まった</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer421')">答えを見る</button>
+                <div class="english-answer" id="answer421">A large crowd gathered.</div>
+            </div>
+
+            <div class="question-block" data-number="422">
+                <div class="japanese-text">422. 最もよく知られた例</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer422')">答えを見る</button>
+                <div class="english-answer" id="answer422">the best known instance</div>
+            </div>
+
+            <div class="question-block" data-number="423">
+                <div class="japanese-text">423. 歌子になりたいと思う強い願望</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer423')">答えを見る</button>
+                <div class="english-answer" id="answer423">a strong desire to be a singer</div>
+            </div>
+
+            <div class="question-block" data-number="424">
+                <div class="japanese-text">424. 生活水準</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer424')">答えを見る</button>
+                <div class="english-answer" id="answer424">the standard of living</div>
+            </div>
+
+            <div class="question-block" data-number="425">
+                <div class="japanese-text">425. 難しい仕事</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer425')">答えを見る</button>
+                <div class="english-answer" id="answer425">a difficult task</div>
+            </div>
+
+            <div class="question-block" data-number="426">
+                <div class="japanese-text">426. 未来の世代のために</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer426')">答えを見る</button>
+                <div class="english-answer" id="answer426">for future generations</div>
+            </div>
+
+            <div class="question-block" data-number="427">
+                <div class="japanese-text">427. 事故の責任を取る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer427')">答えを見る</button>
+                <div class="english-answer" id="answer427">take responsibility for the accident</div>
+            </div>
+
+            <div class="question-block" data-number="428">
+                <div class="japanese-text">428. 動物を用いる実験</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer428')">答えを見る</button>
+                <div class="english-answer" id="answer428">experiments with animals</div>
+            </div>
+
+            <div class="question-block" data-number="429">
+                <div class="japanese-text">429. プロの運動選手</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer429')">答えを見る</button>
+                <div class="english-answer" id="answer429">a professional athlete</div>
+            </div>
+
+            <div class="question-block" data-number="430">
+                <div class="japanese-text">430. ほんの10年前に</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer430')">答えを見る</button>
+                <div class="english-answer" id="answer430">only a decade ago</div>
+            </div>
+
+            <div class="question-block" data-number="431">
+                <div class="japanese-text">431. 5,000ドルの損失</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer431')">答えを見る</button>
+                <div class="english-answer" id="answer431">a loss of $5,000</div>
+            </div>
+
+            <div class="question-block" data-number="432">
+                <div class="japanese-text">432. 高熱を出している</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer432')">答えを見る</button>
+                <div class="english-answer" id="answer432">have a high fever</div>
+            </div>
+
+            <div class="question-block" data-number="433">
+                <div class="japanese-text">433. 相対性理論</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer433')">答えを見る</button>
+                <div class="english-answer" id="answer433">the theory of relativity</div>
+            </div>
+
+            <div class="question-block" data-number="434">
+                <div class="japanese-text">434. 次の仮説を読む</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer434')">答えを見る</button>
+                <div class="english-answer" id="answer434">read the following statement</div>
+            </div>
+
+            <div class="question-block" data-number="435">
+                <div class="japanese-text">435. ボストン大学の教授</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer435')">答えを見る</button>
+                <div class="english-answer" id="answer435">a professor at Boston University</div>
+            </div>
+
+            <div class="question-block" data-number="436">
+                <div class="japanese-text">436. コンピュータの基本機能</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer436')">答えを見る</button>
+                <div class="english-answer" id="answer436">the basic functions of a computer</div>
+            </div>
+
+            <div class="question-block" data-number="437">
+                <div class="japanese-text">437. 地球の表面</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer437')">答えを見る</button>
+                <div class="english-answer" id="answer437">the surface of the earth</div>
+            </div>
+
+            <div class="question-block" data-number="438">
+                <div class="japanese-text">438. ピンクの封筒に手紙を入れる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer438')">答えを見る</button>
+                <div class="english-answer" id="answer438">put the letter in a pink envelop</div>
+            </div>
+
+            <div class="question-block" data-number="439">
+                <div class="japanese-text">439. 国際的な組織</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer439')">答えを見る</button>
+                <div class="english-answer" id="answer439">an international organization</div>
+            </div>
+
+            <div class="question-block" data-number="440">
+                <div class="japanese-text">440. 日本の外交政策</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer440')">答えを見る</button>
+                <div class="english-answer" id="answer440">Japan's foreign policy</div>
+            </div>
+
+            <div class="question-block" data-number="441">
+                <div class="japanese-text">441. 天然資源</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer441')">答えを見る</button>
+                <div class="english-answer" id="answer441">natural resources</div>
+            </div>
+
+            <div class="question-block" data-number="442">
+                <div class="japanese-text">442. 光と影の対比</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer442')">答えを見る</button>
+                <div class="english-answer" id="answer442">the contrast between light and shadow</div>
+            </div>
+
+            <div class="question-block" data-number="443">
+                <div class="japanese-text">443. 情報の洪水</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer443')">答えを見る</button>
+                <div class="english-answer" id="answer443">a flood of information</div>
+            </div>
+
+            <div class="question-block" data-number="444">
+                <div class="japanese-text">444. 連れ合いを探す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer444')">答えを見る</button>
+                <div class="english-answer" id="answer444">look for a mate</div>
+            </div>
+
+            <div class="question-block" data-number="445">
+                <div class="japanese-text">445. 商品の売り買い</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer445')">答えを見る</button>
+                <div class="english-answer" id="answer445">buying and selling goods</div>
+            </div>
+
+            <div class="question-block" data-number="446">
+                <div class="japanese-text">446. 人間と他の動物</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer446')">答えを見る</button>
+                <div class="english-answer" id="answer446">humans and other creatures</div>
+            </div>
+
+            <div class="question-block" data-number="447">
+                <div class="japanese-text">447. 社会構造の変化</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer447')">答えを見る</button>
+                <div class="english-answer" id="answer447">changes in social structure</div>
+            </div>
+
+            <div class="question-block" data-number="448">
+                <div class="japanese-text">448. 歴史と伝統</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer448')">答えを見る</button>
+                <div class="english-answer" id="answer448">history and tradition</div>
+            </div>
+
+            <div class="question-block" data-number="449">
+                <div class="japanese-text">449. 体重を減らす</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer449')">答えを見る</button>
+                <div class="english-answer" id="answer449">lose weight</div>
+            </div>
+
+            <div class="question-block" data-number="450">
+                <div class="japanese-text">450. 慈善のために寄付する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer450')">答えを見る</button>
+                <div class="english-answer" id="answer450">give money to charity</div>
+            </div>
+
+            <div class="question-block" data-number="451">
+                <div class="japanese-text">451. 平均的アメリカ市民</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer451')">答えを見る</button>
+                <div class="english-answer" id="answer451">the average American citizen</div>
+            </div>
+
+            <div class="question-block" data-number="452">
+                <div class="japanese-text">452. 彼に良い印象を与える</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer452')">答えを見る</button>
+                <div class="english-answer" id="answer452">make a good impression on him</div>
+            </div>
+
+            <div class="question-block" data-number="453">
+                <div class="japanese-text">453. 人気のマンガのキャラクター</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer453')">答えを見る</button>
+                <div class="english-answer" id="answer453">a popular cartoon character</div>
+            </div>
+
+            <div class="question-block" data-number="454">
+                <div class="japanese-text">454. 女優としての長い経歴</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer454')">答えを見る</button>
+                <div class="english-answer" id="answer454">a long career as an actress</div>
+            </div>
+
+            <div class="question-block" data-number="455">
+                <div class="japanese-text">455. 新しいホテルの用地</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer455')">答えを見る</button>
+                <div class="english-answer" id="answer455">a site for a new hotel</div>
+            </div>
+
+            <div class="question-block" data-number="456">
+                <div class="japanese-text">456. 列車の乗客</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer456')">答えを見る</button>
+                <div class="english-answer" id="answer456">train passengers</div>
+            </div>
+
+            <div class="question-block" data-number="457">
+                <div class="japanese-text">457. テレビにおける暴力</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer457')">答えを見る</button>
+                <div class="english-answer" id="answer457">violence on TV</div>
+            </div>
+
+            <div class="question-block" data-number="458">
+                <div class="japanese-text">458. 低所得の家族</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer458')">答えを見る</button>
+                <div class="english-answer" id="answer458">low-income families</div>
+            </div>
+
+            <div class="question-block" data-number="459">
+                <div class="japanese-text">459. パリの平均気温</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer459')">答えを見る</button>
+                <div class="english-answer" id="answer459">the average temperature in Paris</div>
+            </div>
+
+            <div class="question-block" data-number="460">
+                <div class="japanese-text">460. 大多数の学生</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer460')">答えを見る</button>
+                <div class="english-answer" id="answer460">the majority of students</div>
+            </div>
+
+            <div class="question-block" data-number="461">
+                <div class="japanese-text">461. 言語の起源</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer461')">答えを見る</button>
+                <div class="english-answer" id="answer461">the origin of language</div>
+            </div>
+
+            <div class="question-block" data-number="462">
+                <div class="japanese-text">462. 英文学を研究する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer462')">答えを見る</button>
+                <div class="english-answer" id="answer462">study English literature</div>
+            </div>
+
+            <div class="question-block" data-number="463">
+                <div class="japanese-text">463. オフィスの設備</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer463')">答えを見る</button>
+                <div class="english-answer" id="answer463">official equipment</div>
+            </div>
+
+            <div class="question-block" data-number="464">
+                <div class="japanese-text">464. 見知らぬ人に話しかける</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer464')">答えを見る</button>
+                <div class="english-answer" id="answer464">talk to a stranger</div>
+            </div>
+
+            <div class="question-block" data-number="465">
+                <div class="japanese-text">465. 強さと弱さ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer465')">答えを見る</button>
+                <div class="english-answer" id="answer465">strength and weakness</div>
+            </div>
+
+            <div class="question-block" data-number="466">
+                <div class="japanese-text">466. 地球という惑星</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer466')">答えを見る</button>
+                <div class="english-answer" id="answer466">the planet Earth</div>
+            </div>
+
+            <div class="question-block" data-number="467">
+                <div class="japanese-text">467. 事実は小説よりも奇なり</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer467')">答えを見る</button>
+                <div class="english-answer" id="answer467">Truth is stranger than fiction</div>
+            </div>
+
+            <div class="question-block" data-number="468">
+                <div class="japanese-text">468. 科学と宗教</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer468')">答えを見る</button>
+                <div class="english-answer" id="answer468">science and religion</div>
+            </div>
+
+            <div class="question-block" data-number="469">
+                <div class="japanese-text">469. 環境汚染</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer469')">答えを見る</button>
+                <div class="english-answer" id="answer469">environmental pollution</div>
+            </div>
+
+            <div class="question-block" data-number="470">
+                <div class="japanese-text">470. 富と権力</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer470')">答えを見る</button>
+                <div class="english-answer" id="answer470">wealth and power</div>
+            </div>
+
+            <div class="question-block" data-number="471">
+                <div class="japanese-text">471. 公文書にサインする</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer471')">答えを見る</button>
+                <div class="english-answer" id="answer471">sign an official document</div>
+            </div>
+
+            <div class="question-block" data-number="472">
+                <div class="japanese-text">472. 200万ドルのもうけを得る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer472')">答えを見る</button>
+                <div class="english-answer" id="answer472">make a $2 million profit</div>
+            </div>
+
+            <div class="question-block" data-number="473">
+                <div class="japanese-text">473. 映画作りの技術</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer473')">答えを見る</button>
+                <div class="english-answer" id="answer473">the technique of film-making</div>
+            </div>
+
+            <div class="question-block" data-number="474">
+                <div class="japanese-text">474. 感情を表現する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer474')">答えを見る</button>
+                <div class="english-answer" id="answer474">express emotions</div>
+            </div>
+
+            <div class="question-block" data-number="475">
+                <div class="japanese-text">475. 自然現象</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer475')">答えを見る</button>
+                <div class="english-answer" id="answer475">a natural phenomenon</div>
+            </div>
+
+            <div class="question-block" data-number="476">
+                <div class="japanese-text">476. 恐怖映画</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer476')">答えを見る</button>
+                <div class="english-answer" id="answer476">a horror movie</div>
+            </div>
+
+            <div class="question-block" data-number="477">
+                <div class="japanese-text">477. はしごを登る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer477')">答えを見る</button>
+                <div class="english-answer" id="answer477">climb a ladder</div>
+            </div>
+
+            <div class="question-block" data-number="478">
+                <div class="japanese-text">478. 80億人の人々</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer478')">答えを見る</button>
+                <div class="english-answer" id="answer478">8 billion people</div>
+            </div>
+
+            <div class="question-block" data-number="479">
+                <div class="japanese-text">479. 女性の社会的地位</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer479')">答えを見る</button>
+                <div class="english-answer" id="answer479">the social status of women</div>
+            </div>
+
+            <div class="question-block" data-number="480">
+                <div class="japanese-text">480. 現代の若者</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer480')">答えを見る</button>
+                <div class="english-answer" id="answer480">modern youth</div>
+            </div>
+
+            <div class="question-block" data-number="481">
+                <div class="japanese-text">481. 自分の能力に自信がある</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer481')">答えを見る</button>
+                <div class="english-answer" id="answer481">have confidence in my ability</div>
+            </div>
+
+            <div class="question-block" data-number="482">
+                <div class="japanese-text">482. 太平洋の周辺</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer482')">答えを見る</button>
+                <div class="english-answer" id="answer482">the edge of the Pacific Ocean</div>
+            </div>
+
+            <div class="question-block" data-number="483">
+                <div class="japanese-text">483. 家庭用品</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer483')">答えを見る</button>
+                <div class="english-answer" id="answer483">household goods</div>
+            </div>
+
+            <div class="question-block" data-number="484">
+                <div class="japanese-text">484. 偉大な学者</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer484')">答えを見る</button>
+                <div class="english-answer" id="answer484">a great scholar</div>
+            </div>
+
+            <div class="question-block" data-number="485">
+                <div class="japanese-text">485. 新しい調査によると</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer485')">答えを見る</button>
+                <div class="english-answer" id="answer485">according to a new survey</div>
+            </div>
+
+            <div class="question-block" data-number="486">
+                <div class="japanese-text">486. 5,000語の語彙</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer486')">答えを見る</button>
+                <div class="english-answer" id="answer486">a vocabulary of 5,000 words</div>
+            </div>
+
+            <div class="question-block" data-number="487">
+                <div class="japanese-text">487. 天敵</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer487')">答えを見る</button>
+                <div class="english-answer" id="answer487">a natural enemy</div>
+            </div>
+
+            <div class="question-block" data-number="488">
+                <div class="japanese-text">488. 建設中の橋</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer488')">答えを見る</button>
+                <div class="english-answer" id="answer488">a bridge under construction</div>
+            </div>
+
+            <div class="question-block" data-number="489">
+                <div class="japanese-text">489. 歴史に関する講義</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer489')">答えを見る</button>
+                <div class="english-answer" id="answer489">a lecture on history</div>
+            </div>
+
+            <div class="question-block" data-number="490">
+                <div class="japanese-text">490. 彼の指示に従う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer490')">答えを見る</button>
+                <div class="english-answer" id="answer490">follow his instructions</div>
+            </div>
+
+            <div class="question-block" data-number="491">
+                <div class="japanese-text">491. 経済危機を乗り越える</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer491')">答えを見る</button>
+                <div class="english-answer" id="answer491">get over the economic crisis</div>
+            </div>
+
+            <div class="question-block" data-number="492">
+                <div class="japanese-text">492. 歯科医の道具</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer492')">答えを見る</button>
+                <div class="english-answer" id="answer492">a dentist's instrument</div>
+            </div>
+
+            <div class="question-block" data-number="493">
+                <div class="japanese-text">493. さまざまな作物</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer493')">答えを見る</button>
+                <div class="english-answer" id="answer493">grow various crops</div>
+            </div>
+
+            <div class="question-block" data-number="494">
+                <div class="japanese-text">494. レーザー兵器</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer494')">答えを見る</button>
+                <div class="english-answer" id="answer494">a laser weapon</div>
+            </div>
+
+            <div class="question-block" data-number="495">
+                <div class="japanese-text">495. 電子装置</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer495')">答えを見る</button>
+                <div class="english-answer" id="answer495">an electronic device</div>
+            </div>
+
+            <div class="question-block" data-number="496">
+                <div class="japanese-text">496. 勝利への道</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer496')">答えを見る</button>
+                <div class="english-answer" id="answer496">the path to victory</div>
+            </div>
+
+            <div class="question-block" data-number="497">
+                <div class="japanese-text">497. 地震を予知する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer497')">答えを見る</button>
+                <div class="english-answer" id="answer497">predict earthquakes</div>
+            </div>
+
+            <div class="question-block" data-number="498">
+                <div class="japanese-text">498. きれいな小川</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer498')">答えを見る</button>
+                <div class="english-answer" id="answer498">a clear mountain stream</div>
+            </div>
+
+            <div class="question-block" data-number="499">
+                <div class="japanese-text">499. 自由の概念</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer499')">答えを見る</button>
+                <div class="english-answer" id="answer499">the notion of freedom</div>
+            </div>
+
+            <div class="question-block" data-number="500">
+                <div class="japanese-text">500. 庭の木</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer500')">答えを見る</button>
+                <div class="english-answer" id="answer500">a tree in the yard</div>
+            </div>
+
+            <div class="question-block" data-number="501">
+                <div class="japanese-text">501. 戦争の犠牲者</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer501')">答えを見る</button>
+                <div class="english-answer" id="answer501">victims of the war</div>
+            </div>
+
+            <div class="question-block" data-number="502">
+                <div class="japanese-text">502. 燃料を使い果たす</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer502')">答えを見る</button>
+                <div class="english-answer" id="answer502">run out of fuel</div>
+            </div>
+
+            <div class="question-block" data-number="503">
+                <div class="japanese-text">503. すべての人類の共通の祖先</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer503')">答えを見る</button>
+                <div class="english-answer" id="answer503">the common ancestors of all humans</div>
+            </div>
+
+            <div class="question-block" data-number="504">
+                <div class="japanese-text">504. ナイル川の豊かな土壌</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer504')">答えを見る</button>
+                <div class="english-answer" id="answer504">the rich soil of the Nile River</div>
+            </div>
+
+            <div class="question-block" data-number="505">
+                <div class="japanese-text">505. 教育についての討論</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer505')">答えを見る</button>
+                <div class="english-answer" id="answer505">a debate on education</div>
+            </div>
+
+            <div class="question-block" data-number="506">
+                <div class="japanese-text">506. 凶悪犯罪</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer506')">答えを見る</button>
+                <div class="english-answer" id="answer506">a violent crime</div>
+            </div>
+
+            <div class="question-block" data-number="507">
+                <div class="japanese-text">507. 私の友人と同僚</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer507')">答えを見る</button>
+                <div class="english-answer" id="answer507">my friends and colleagues</div>
+            </div>
+
+            <div class="question-block" data-number="508">
+                <div class="japanese-text">508. たなから本を取る</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer508')">答えを見る</button>
+                <div class="english-answer" id="answer508">take a book from the shelf</div>
+            </div>
+
+            <div class="question-block" data-number="509">
+                <div class="japanese-text">509. DNAの分析</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer509')">答えを見る</button>
+                <div class="english-answer" id="answer509">analysis of DNA</div>
+            </div>
+
+            <div class="question-block" data-number="510">
+                <div class="japanese-text">510. 宇宙の星</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer510')">答えを見る</button>
+                <div class="english-answer" id="answer510">stars in the universe</div>
+            </div>
+
+            <div class="question-block" data-number="511">
+                <div class="japanese-text">511. 電気で動く機械</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer511')">答えを見る</button>
+                <div class="english-answer" id="answer511">a machine run by electricity</div>
+            </div>
+
+            <div class="question-block" data-number="512">
+                <div class="japanese-text">512. 知的のような社会性昆虫</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer512')">答えを見る</button>
+                <div class="english-answer" id="answer512">social insects like ants</div>
+            </div>
+
+            <div class="question-block" data-number="513">
+                <div class="japanese-text">513. クモの巣にかかる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer513')">答えを見る</button>
+                <div class="english-answer" id="answer513">be caught in a spider's web</div>
+            </div>
+
+            <div class="question-block" data-number="514">
+                <div class="japanese-text">514. 激しい雨</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer514')">答えを見る</button>
+                <div class="english-answer" id="answer514">a heavy storm</div>
+            </div>
+
+            <div class="question-block" data-number="515">
+                <div class="japanese-text">515. 十分な時間がある</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer515')">答えを見る</button>
+                <div class="english-answer" id="answer515">have plenty of time</div>
+            </div>
+
+            <div class="question-block" data-number="516">
+                <div class="japanese-text">516. 農業に向いた土地</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer516')">答えを見る</button>
+                <div class="english-answer" id="answer516">land suitable for agriculture</div>
+            </div>
+
+            <div class="question-block" data-number="517">
+                <div class="japanese-text">517. 目の色を決める遺伝子</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer517')">答えを見る</button>
+                <div class="english-answer" id="answer517">the gene for eye color</div>
+            </div>
+
+            <div class="question-block" data-number="518">
+                <div class="japanese-text">518. 火星に生物がいるという証拠</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer518')">答えを見る</button>
+                <div class="english-answer" id="answer518">evidence of life on Mars</div>
+            </div>
+
+            <div class="question-block" data-number="519">
+                <div class="japanese-text">519. 重大な結果をまねく</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer519')">答えを見る</button>
+                <div class="english-answer" id="answer519">have serious consequences</div>
+            </div>
+
+            <div class="question-block" data-number="520">
+                <div class="japanese-text">520. 母親と幼児の関係</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer520')">答えを見る</button>
+                <div class="english-answer" id="answer520">the mother-infant relationship</div>
+            </div>
+
+            <div class="question-block" data-number="521">
+                <div class="japanese-text">521. スポーツをする暇がない</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer521')">答えを見る</button>
+                <div class="english-answer" id="answer521">have no leisure time for sports</div>
+            </div>
+
+            <div class="question-block" data-number="522">
+                <div class="japanese-text">522. 灰色の脳細胞</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer522')">答えを見る</button>
+                <div class="english-answer" id="answer522">the gray cells of the brain</div>
+            </div>
+
+            <div class="question-block" data-number="523">
+                <div class="japanese-text">523. 音楽の才能がある</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer523')">答えを見る</button>
+                <div class="english-answer" id="answer523">have musical talent</div>
+            </div>
+
+            <div class="question-block" data-number="524">
+                <div class="japanese-text">524. 新聞広告</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer524')">答えを見る</button>
+                <div class="english-answer" id="answer524">newspaper advertising</div>
+            </div>
+
+            <div class="question-block" data-number="525">
+                <div class="japanese-text">525. ある程度まで増える</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer525')">答えを見る</button>
+                <div class="english-answer" id="answer525">increase to some extent</div>
+            </div>
+
+            <div class="question-block" data-number="526">
+                <div class="japanese-text">526. ゴミを出す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer526')">答えを見る</button>
+                <div class="english-answer" id="answer526">take out garbage</div>
+            </div>
+
+            <div class="question-block" data-number="527">
+                <div class="japanese-text">527. 一般大衆</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer527')">答えを見る</button>
+                <div class="english-answer" id="answer527">the general public</div>
+            </div>
+
+            <div class="question-block" data-number="528">
+                <div class="japanese-text">528. さまざまな種類の花</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer528')">答えを見る</button>
+                <div class="english-answer" id="answer528">various kinds of flowers</div>
+            </div>
+
+            <div class="question-block" data-number="529">
+                <div class="japanese-text">529. お互いに似ている</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer529')">答えを見る</button>
+                <div class="english-answer" id="answer529">be similar to each other</div>
+            </div>
+
+            <div class="question-block" data-number="530">
+                <div class="japanese-text">530. 完全な失敗</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer530')">答えを見る</button>
+                <div class="english-answer" id="answer530">a complete failure</div>
+            </div>
+
+            <div class="question-block" data-number="531">
+                <div class="japanese-text">531. 物価の急激な上昇</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer531')">答えを見る</button>
+                <div class="english-answer" id="answer531">a sharp rise in prices</div>
+            </div>
+
+            <div class="question-block" data-number="532">
+                <div class="japanese-text">532. 高級なレストラン</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer532')">答えを見る</button>
+                <div class="english-answer" id="answer532">an expensive restaurant</div>
+            </div>
+
+            <div class="question-block" data-number="533">
+                <div class="japanese-text">533. 政治的な指導者</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer533')">答えを見る</button>
+                <div class="english-answer" id="answer533">a political leader</div>
+            </div>
+
+            <div class="question-block" data-number="534">
+                <div class="japanese-text">534. 危険に気づいている</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer534')">答えを見る</button>
+                <div class="english-answer" id="answer534">be aware of the danger</div>
+            </div>
+
+            <div class="question-block" data-number="535">
+                <div class="japanese-text">535. 古代のギリシャとローマ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer535')">答えを見る</button>
+                <div class="english-answer" id="answer535">ancient Greece and Rome</div>
+            </div>
+
+            <div class="question-block" data-number="536">
+                <div class="japanese-text">536. 医学の研究</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer536')">答えを見る</button>
+                <div class="english-answer" id="answer536">a medical study</div>
+            </div>
+
+            <div class="question-block" data-number="537">
+                <div class="japanese-text">537. 水は生命に不可欠だ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer537')">答えを見る</button>
+                <div class="english-answer" id="answer537">Water is essential to life.</div>
+            </div>
+
+            <div class="question-block" data-number="538">
+                <div class="japanese-text">538. 巨大な都市</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer538')">答えを見る</button>
+                <div class="english-answer" id="answer538">a huge city</div>
+            </div>
+
+            <div class="question-block" data-number="539">
+                <div class="japanese-text">539. ひどい事故</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer539')">答えを見る</button>
+                <div class="english-answer" id="answer539">a terrible accident</div>
+            </div>
+
+            <div class="question-block" data-number="540">
+                <div class="japanese-text">540. 実用的な英語</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer540')">答えを見る</button>
+                <div class="english-answer" id="answer540">practical English</div>
+            </div>
+
+            <div class="question-block" data-number="541">
+                <div class="japanese-text">541. 全世界</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer541')">答えを見る</button>
+                <div class="english-answer" id="answer541">the entire world</div>
+            </div>
+
+            <div class="question-block" data-number="542">
+                <div class="japanese-text">542. 私のお気に入りな食べ物</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer542')">答えを見る</button>
+                <div class="english-answer" id="answer542">my favorite food</div>
+            </div>
+
+            <div class="question-block" data-number="543">
+                <div class="japanese-text">543. 快適な生活を楽しむ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer543')">答えを見る</button>
+                <div class="english-answer" id="answer543">enjoy a comfortable life</div>
+            </div>
+
+            <div class="question-block" data-number="544">
+                <div class="japanese-text">544. 小さい問題</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer544')">答えを見る</button>
+                <div class="english-answer" id="answer544">a minor problem</div>
+            </div>
+
+            <div class="question-block" data-number="545">
+                <div class="japanese-text">545. 典型的なアメリカの家族</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer545')">答えを見る</button>
+                <div class="english-answer" id="answer545">a typical American family</div>
+            </div>
+
+            <div class="question-block" data-number="546">
+                <div class="japanese-text">546. 生活するのに理想的な土地</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer546')">答えを見る</button>
+                <div class="english-answer" id="answer546">an ideal place to live</div>
+            </div>
+
+            <div class="question-block" data-number="547">
+                <div class="japanese-text">547. ヨーロッパの主要な都市</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer547')">答えを見る</button>
+                <div class="english-answer" id="answer547">the principal cities of Europe</div>
+            </div>
+
+            <div class="question-block" data-number="548">
+                <div class="japanese-text">548. 最も適切な単語</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer548')">答えを見る</button>
+                <div class="english-answer" id="answer548">the most appropriate word</div>
+            </div>
+
+            <div class="question-block" data-number="549">
+                <div class="japanese-text">549. からのビン</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer549')">答えを見る</button>
+                <div class="english-answer" id="answer549">an empty bottle</div>
+            </div>
+
+            <div class="question-block" data-number="550">
+                <div class="japanese-text">550. 急速な経済成長</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer550')">答えを見る</button>
+                <div class="english-answer" id="answer550">rapid economic growth</div>
+            </div>
+
+            <div class="question-block" data-number="551">
+                <div class="japanese-text">551. 精神の病</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer551')">答えを見る</button>
+                <div class="english-answer" id="answer551">a mental illness</div>
+            </div>
+
+            <div class="question-block" data-number="552">
+                <div class="japanese-text">552. すばらしいアイディア</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer552')">答えを見る</button>
+                <div class="english-answer" id="answer552">an excellent idea</div>
+            </div>
+
+            <div class="question-block" data-number="553">
+                <div class="japanese-text">553. 君の都合がいいときに</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer553')">答えを見る</button>
+                <div class="english-answer" id="answer553">when it’s convenient for you</div>
+            </div>
+
+            <div class="question-block" data-number="554">
+                <div class="japanese-text">554. 潜在的な危険</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer554')">答えを見る</button>
+                <div class="english-answer" id="answer554">potential danger</div>
+            </div>
+
+            <div class="question-block" data-number="555">
+                <div class="japanese-text">555. アメリカからの財政的援助</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer555')">答えを見る</button>
+                <div class="english-answer" id="answer555">financial support from the US</div>
+            </div>
+
+            <div class="question-block" data-number="556">
+                <div class="japanese-text">556. ばく大な額の損害</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer556')">答えを見る</button>
+                <div class="english-answer" id="answer556">an enormous amount of damage</div>
+            </div>
+
+            <div class="question-block" data-number="557">
+                <div class="japanese-text">557. 珍しい切手</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer557')">答えを見る</button>
+                <div class="english-answer" id="answer557">a rare stamp</div>
+            </div>
+
+            <div class="question-block" data-number="558">
+                <div class="japanese-text">558. 人工知能 (AI)</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer558')">答えを見る</button>
+                <div class="english-answer" id="answer558">artificial intelligence</div>
+            </div>
+
+            <div class="question-block" data-number="559">
+                <div class="japanese-text">559. ちっちゃな子猫</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer559')">答えを見る</button>
+                <div class="english-answer" id="answer559">a tiny kitten</div>
+            </div>
+
+            <div class="question-block" data-number="560">
+                <div class="japanese-text">560. かなりの時間を費やす</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer560')">答えを見る</button>
+                <div class="english-answer" id="answer560">spend considerable time</div>
+            </div>
+
+            <div class="question-block" data-number="561">
+                <div class="japanese-text">561. 彼女の肌は日光に敏感だ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer561')">答えを見る</button>
+                <div class="english-answer" id="answer561">Her skin is sensitive to sunlight</div>
+            </div>
+
+            <div class="question-block" data-number="562">
+                <div class="japanese-text">562. 高度な知的能力</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer562')">答えを見る</button>
+                <div class="english-answer" id="answer562">high intellectual ability</div>
+            </div>
+
+            <div class="question-block" data-number="563">
+                <div class="japanese-text">563. 塩分の多い食事でのどが渇く</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer563')">答えを見る</button>
+                <div class="english-answer" id="answer563">Salty food makes you thirsty</div>
+            </div>
+
+            <div class="question-block" data-number="564">
+                <div class="japanese-text">564. 女性に対して礼儀正しい</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer564')">答えを見る</button>
+                <div class="english-answer" id="answer564">be polite to ladies</div>
+            </div>
+
+            <div class="question-block" data-number="565">
+                <div class="japanese-text">565. 正確な情報</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer565')">答えを見る</button>
+                <div class="english-answer" id="answer565">accurate information</div>
+            </div>
+
+            <div class="question-block" data-number="566">
+                <div class="japanese-text">566. 失礼な振る舞い</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer566')">答えを見る</button>
+                <div class="english-answer" id="answer566">rude behavior</div>
+            </div>
+
+            <div class="question-block" data-number="567">
+                <div class="japanese-text">567. 十分な注意を払う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer567')">答えを見る</button>
+                <div class="english-answer" id="answer567">pay sufficient attention</div>
+            </div>
+
+            <div class="question-block" data-number="568">
+                <div class="japanese-text">568. 都会の暮らし</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer568')">答えを見る</button>
+                <div class="english-answer" id="answer568">urban life</div>
+            </div>
+
+            <div class="question-block" data-number="569">
+                <div class="japanese-text">569. 一時的な記憶喪失</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer569')">答えを見る</button>
+                <div class="english-answer" id="answer569">temporary loss of memory</div>
+            </div>
+
+            <div class="question-block" data-number="570">
+                <div class="japanese-text">570. 原始的な社会</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer570')">答えを見る</button>
+                <div class="english-answer" id="answer570">a primitive society</div>
+            </div>
+
+            <div class="question-block" data-number="571">
+                <div class="japanese-text">571. 永久歯</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer571')">答えを見る</button>
+                <div class="english-answer" id="answer571">permanent teeth</div>
+            </div>
+
+            <div class="question-block" data-number="572">
+                <div class="japanese-text">572. 高齢者のケア</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer572')">答えを見る</button>
+                <div class="english-answer" id="answer572">the care of elderly people</div>
+            </div>
+
+            <div class="question-block" data-number="573">
+                <div class="japanese-text">573. 厳しい冬の天候</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer573')">答えを見る</button>
+                <div class="english-answer" id="answer573">severe winter weather</div>
+            </div>
+
+            <div class="question-block" data-number="574">
+                <div class="japanese-text">574. 簡潔な説明</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer574')">答えを見る</button>
+                <div class="english-answer" id="answer574">a brief explanation</div>
+            </div>
+
+            <div class="question-block" data-number="575">
+                <div class="japanese-text">575. 流動的な社会</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer575')">答えを見る</button>
+                <div class="english-answer" id="answer575">a mobile society</div>
+            </div>
+
+            <div class="question-block" data-number="576">
+                <div class="japanese-text">576. 中国からの最新のニュース</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer576')">答えを見る</button>
+                <div class="english-answer" id="answer576">the latest news from China</div>
+            </div>
+
+            <div class="question-block" data-number="577">
+                <div class="japanese-text">577. イスラエルへの軍事的援助</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer577')">答えを見る</button>
+                <div class="english-answer" id="answer577">military aid to Israel</div>
+            </div>
+
+            <div class="question-block" data-number="578">
+                <div class="japanese-text">578. 厳しい規則</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer578')">答えを見る</button>
+                <div class="english-answer" id="answer578">strict rules</div>
+            </div>
+
+            <div class="question-block" data-number="579">
+                <div class="japanese-text">579. 固体の状態</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer579')">答えを見る</button>
+                <div class="english-answer" id="answer579">a solid state</div>
+            </div>
+
+            <div class="question-block" data-number="580">
+                <div class="japanese-text">580. ばかなことを言う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer580')">答えを見る</button>
+                <div class="english-answer" id="answer580">say stupid things</div>
+            </div>
+
+            <div class="question-block" data-number="581">
+                <div class="japanese-text">581. 生物兵器</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer581')">答えを見る</button>
+                <div class="english-answer" id="answer581">biological weapons</div>
+            </div>
+
+            <div class="question-block" data-number="582">
+                <div class="japanese-text">582. おそらく彼は来ないだろう</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer582')">答えを見る</button>
+                <div class="english-answer" id="answer582">Probably he won't come.</div>
+            </div>
+
+            <div class="question-block" data-number="583">
+                <div class="japanese-text">583. ビルのことはほとんど知らない</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer583')">答えを見る</button>
+                <div class="english-answer" id="answer583">I hardly know Bill.</div>
+            </div>
+
+            <div class="question-block" data-number="584">
+                <div class="japanese-text">584. 昼食後すぐに出発する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer584')">答えを見る</button>
+                <div class="english-answer" id="answer584">leave immediately after lunch</div>
+            </div>
+
+            <div class="question-block" data-number="585">
+                <div class="japanese-text">585. ついに彼は大統領になった</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer585')">答えを見る</button>
+                <div class="english-answer" id="answer585">He eventually became President.</div>
+            </div>
+
+            <div class="question-block" data-number="586">
+                <div class="japanese-text">586. しばしば使われる言葉</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer586')">答えを見る</button>
+                <div class="english-answer" id="answer586">a frequently used word</div>
+            </div>
+
+            <div class="question-block" data-number="587">
+                <div class="japanese-text">587. 非常に難しい問題</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer587')">答えを見る</button>
+                <div class="english-answer" id="answer587">an extremely difficult problem</div>
+            </div>
+
+            <div class="question-block" data-number="588">
+                <div class="japanese-text">588. だんだん冷たくなる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer588')">答えを見る</button>
+                <div class="english-answer" id="answer588">gradually become colder</div>
+            </div>
+
+            <div class="question-block" data-number="589">
+                <div class="japanese-text">589. すぐにそれとわかる歌</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer589')">答えを見る</button>
+                <div class="english-answer" id="answer589">instantly recognizable songs</div>
+            </div>
+
+            <div class="question-block" data-number="590">
+                <div class="japanese-text">590. 彼は金持ちだが、それにもかかわらず、不幸だ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer590')">答えを見る</button>
+                <div class="english-answer" id="answer590">He is rich; nevertheless he is unhappy.</div>
+            </div>
+
+            <div class="question-block" data-number="591">
+                <div class="japanese-text">591. 彼は親切で、その上強い</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer591')">答えを見る</button>
+                <div class="english-answer" id="answer591">He's kind; moreover, he's strong.</div>
+            </div>
+
+            <div class="question-block" data-number="592">
+                <div class="japanese-text">592. 比較的少数の人々</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer592')">答えを見る</button>
+                <div class="english-answer" id="answer592">relatively few people</div>
+            </div>
+
+            <div class="question-block" data-number="593">
+                <div class="japanese-text">593. 一見簡単な問題</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer593')">答えを見る</button>
+                <div class="english-answer" id="answer593">an apparently simple question</div>
+            </div>
+
+            <div class="question-block" data-number="594">
+                <div class="japanese-text">594. 絶対あなたとは結婚しない</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer594')">答えを見る</button>
+                <div class="english-answer" id="answer594">I will definitely not marry you</div>
+            </div>
+
+            <div class="question-block" data-number="595">
+                <div class="japanese-text">595. 主にその問題のせいで</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer595')">答えを見る</button>
+                <div class="english-answer" id="answer595">largely because of the problem</div>
+            </div>
+
+            <div class="question-block" data-number="596">
+                <div class="japanese-text">596. クラスの大部分は日本人だ</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer596')">答えを見る</button>
+                <div class="english-answer" id="answer596">The class is mostly Japanese.</div>
+            </div>
+
+            <div class="question-block" data-number="597">
+                <div class="japanese-text">597. およそ1万年前</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer597')">答えを見る</button>
+                <div class="english-answer" id="answer597">approximately 10,000 years ago</div>
+            </div>
+
+            <div class="question-block" data-number="598">
+                <div class="japanese-text">598. 彼の家で一晩泊まる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer598')">答えを見る</button>
+                <div class="english-answer" id="answer598">stay overnight in his house</div>
+            </div>
+
+            <div class="question-block" data-number="599">
+                <div class="japanese-text">599. 偶然島を発見する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer599')">答えを見る</button>
+                <div class="english-answer" id="answer599">accidentally discover an island</div>
+            </div>
+
+            <div class="question-block" data-number="600">
+                <div class="japanese-text">600. 努力にもかかわらず彼は負けた</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer600')">答えを見る</button>
+                <div class="english-answer" id="answer600">He lost despite his efforts.</div>
+            </div>
+
+            <div class="question-block" data-number="601">
+                <div class="japanese-text">601. まっすぐに前に進む</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer601')">答えを見る</button>
+                <div class="english-answer" id="answer601">proceed straight ahead</div>
+            </div>
+
+            <div class="question-block" data-number="602">
+                <div class="japanese-text">602. ドライバーの安全を確保する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer602')">答えを見る</button>
+                <div class="english-answer" id="answer602">ensure the safety of drivers</div>
+            </div>
+
+            <div class="question-block" data-number="603">
+                <div class="japanese-text">603. その言葉の意味を解釈する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer603')">答えを見る</button>
+                <div class="english-answer" id="answer603">interpret the meaning of the word</div>
+            </div>
+
+            <div class="question-block" data-number="604">
+                <div class="japanese-text">604. いくつかの国は存在しなくなった</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer604')">答えを見る</button>
+                <div class="english-answer" id="answer604">Some countries ceased to exist.</div>
+            </div>
+
+            <div class="question-block" data-number="605">
+                <div class="japanese-text">605. 公共の場での喫煙を禁ずる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer605')">答えを見る</button>
+                <div class="english-answer" id="answer605">ban smoking in public places</div>
+            </div>
+
+            <div class="question-block" data-number="606">
+                <div class="japanese-text">606. 法に従う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer606')">答えを見る</button>
+                <div class="english-answer" id="answer606">obey the law</div>
+            </div>
+
+            <div class="question-block" data-number="607">
+                <div class="japanese-text">607. 紙の必要性を無くす</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer607')">答えを見る</button>
+                <div class="english-answer" id="answer607">eliminate the need for paper</div>
+            </div>
+
+            <div class="question-block" data-number="608">
+                <div class="japanese-text">608. 上司からの圧力に抵抗する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer608')">答えを見る</button>
+                <div class="english-answer" id="answer608">resist pressure from above</div>
+            </div>
+
+            <div class="question-block" data-number="609">
+                <div class="japanese-text">609. 無論彼に同伴する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer609')">答えを見る</button>
+                <div class="english-answer" id="answer609">accompany the president</div>
+            </div>
+
+            <div class="question-block" data-number="610">
+                <div class="japanese-text">610. 犯罪を犯す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer610')">答えを見る</button>
+                <div class="english-answer" id="answer610">commit a crime</div>
+            </div>
+
+            <div class="question-block" data-number="611">
+                <div class="japanese-text">611. アメリカン・ドリームを追い求める</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer611')">答えを見る</button>
+                <div class="english-answer" id="answer611">pursue the American Dream</div>
+            </div>
+
+            <div class="question-block" data-number="612">
+                <div class="japanese-text">612. それが不可能なことを示す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer612')">答えを見る</button>
+                <div class="english-answer" id="answer612">demonstrate that it is impossible</div>
+            </div>
+
+            <div class="question-block" data-number="613">
+                <div class="japanese-text">613. きっと君は勝つと思う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer613')">答えを見る</button>
+                <div class="english-answer" id="answer613">I bet you'll win.</div>
+            </div>
+
+            <div class="question-block" data-number="614">
+                <div class="japanese-text">614. 彼らの人生を破壊する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer614')">答えを見る</button>
+                <div class="english-answer" id="answer614">ruin his life</div>
+            </div>
+
+            <div class="question-block" data-number="615">
+                <div class="japanese-text">615. 警察に知らせる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer615')">答えを見る</button>
+                <div class="english-answer" id="answer615">happen to tell the police</div>
+            </div>
+
+            <div class="question-block" data-number="616">
+                <div class="japanese-text">616. 壁に取り付けられた本棚</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer616')">答えを見る</button>
+                <div class="english-answer" id="answer616">a bookcase attached to the wall</div>
+            </div>
+
+            <div class="question-block" data-number="617">
+                <div class="japanese-text">617. 立場を逆転する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer617')">答えを見る</button>
+                <div class="english-answer" id="answer617">reverse the positions</div>
+            </div>
+
+            <div class="question-block" data-number="618">
+                <div class="japanese-text">618. 言論の自由を制限する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer618')">答えを見る</button>
+                <div class="english-answer" id="answer618">restrict freedom of speech</div>
+            </div>
+
+            <div class="question-block" data-number="619">
+                <div class="japanese-text">619. 体は細胞で構成されている</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer619')">答えを見る</button>
+                <div class="english-answer" id="answer619">The body is composed of cells.</div>
+            </div>
+
+            <div class="question-block" data-number="620">
+                <div class="japanese-text">620. 壁にもたれる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer620')">答えを見る</button>
+                <div class="english-answer" id="answer620">lean against the wall</div>
+            </div>
+
+            <div class="question-block" data-number="621">
+                <div class="japanese-text">621. マーガリンをバターの代わりに用いる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer621')">答えを見る</button>
+                <div class="english-answer" id="answer621">substitute margarine for butter</div>
+            </div>
+
+            <div class="question-block" data-number="622">
+                <div class="japanese-text">622. 人類の歴史をたどる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer622')">答えを見る</button>
+                <div class="english-answer" id="answer622">trace human history</div>
+            </div>
+
+            <div class="question-block" data-number="623">
+                <div class="japanese-text">623. 彼らの会話をじゃまする</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer623')">答えを見る</button>
+                <div class="english-answer" id="answer623">interrupt their conversation</div>
+            </div>
+
+            <div class="question-block" data-number="624">
+                <div class="japanese-text">624. 困難な問題に立ち向かう</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer624')">答えを見る</button>
+                <div class="english-answer" id="answer624">confront a difficult problem</div>
+            </div>
+
+            <div class="question-block" data-number="625">
+                <div class="japanese-text">625. この例が彼の能力を示す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer625')">答えを見る</button>
+                <div class="english-answer" id="answer625">This example illustrates his ability.</div>
+            </div>
+
+            <div class="question-block" data-number="626">
+                <div class="japanese-text">626. スピード違反で彼を逮捕する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer626')">答えを見る</button>
+                <div class="english-answer" id="answer626">arrest him for speeding</div>
+            </div>
+
+            <div class="question-block" data-number="627">
+                <div class="japanese-text">627. 想像力を刺激する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer627')">答えを見る</button>
+                <div class="english-answer" id="answer627">stimulate the imagination</div>
+            </div>
+
+            <div class="question-block" data-number="628">
+                <div class="japanese-text">628. 君が勝つことを保証する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer628')">答えを見る</button>
+                <div class="english-answer" id="answer628">assure you that you will win</div>
+            </div>
+
+            <div class="question-block" data-number="629">
+                <div class="japanese-text">629. 医師に相談して助言を求める</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer629')">答えを見る</button>
+                <div class="english-answer" id="answer629">consult a doctor for advice</div>
+            </div>
+
+            <div class="question-block" data-number="630">
+                <div class="japanese-text">630. 気分がすぐれない</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer630')">答えを見る</button>
+                <div class="english-answer" id="answer630">feel too depressed to go out</div>
+            </div>
+
+            <div class="question-block" data-number="631">
+                <div class="japanese-text">631. 壁に突進する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer631')">答えを見る</button>
+                <div class="english-answer" id="answer631">rush into the wall</div>
+            </div>
+
+            <div class="question-block" data-number="632">
+                <div class="japanese-text">632. 彼に詩を書く気を起こさせる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer632')">答えを見る</button>
+                <div class="english-answer" id="answer632">inspire him to write a poem</div>
+            </div>
+
+            <div class="question-block" data-number="633">
+                <div class="japanese-text">633. 中国史を専攻する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer633')">答えを見る</button>
+                <div class="english-answer" id="answer633">specialize in Chinese history</div>
+            </div>
+
+            <div class="question-block" data-number="634">
+                <div class="japanese-text">634. 植物を栽培する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer634')">答えを見る</button>
+                <div class="english-answer" id="answer634">cultivate plants</div>
+            </div>
+
+            <div class="question-block" data-number="635">
+                <div class="japanese-text">635. 約束を果たす</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer635')">答えを見る</button>
+                <div class="english-answer" id="answer635">fulfill the promise</div>
+            </div>
+
+            <div class="question-block" data-number="636">
+                <div class="japanese-text">636. 情報を伝える</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer636')">答えを見る</button>
+                <div class="english-answer" id="answer636">transmit messages</div>
+            </div>
+
+            <div class="question-block" data-number="637">
+                <div class="japanese-text">637. コンピュータ会社を設立する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer637')">答えを見る</button>
+                <div class="english-answer" id="answer637">found a computer company</div>
+            </div>
+
+            <div class="question-block" data-number="638">
+                <div class="japanese-text">638. 歌いながら手をたたきなさい</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer638')">答えを見る</button>
+                <div class="english-answer" id="answer638">Clap your hands as you sing.</div>
+            </div>
+
+            <div class="question-block" data-number="639">
+                <div class="japanese-text">639. 急に泣き出す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer639')">答えを見る</button>
+                <div class="english-answer" id="answer639">burst into tears</div>
+            </div>
+
+            <div class="question-block" data-number="640">
+                <div class="japanese-text">640. 女王様におじぎをする</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer640')">答えを見る</button>
+                <div class="english-answer" id="answer640">bow to the queen</div>
+            </div>
+
+            <div class="question-block" data-number="641">
+                <div class="japanese-text">641. その考えをばかばかしいと無視する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer641')">答えを見る</button>
+                <div class="english-answer" id="answer641">dismiss the idea as nonsense</div>
+            </div>
+
+            <div class="question-block" data-number="642">
+                <div class="japanese-text">642. 動物を繁殖させる方法</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer642')">答えを見る</button>
+                <div class="english-answer" id="answer642">how to breed animals</div>
+            </div>
+
+            <div class="question-block" data-number="643">
+                <div class="japanese-text">643. 子供が働くのを禁じる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer643')">答えを見る</button>
+                <div class="english-answer" id="answer643">prohibit children from working</div>
+            </div>
+
+            <div class="question-block" data-number="644">
+                <div class="japanese-text">644. 対価を払わざるをえない</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer644')">答えを見る</button>
+                <div class="english-answer" id="answer644">be obliged to pay the price</div>
+            </div>
+
+            <div class="question-block" data-number="645">
+                <div class="japanese-text">645. その地位に適任である</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer645')">答えを見る</button>
+                <div class="english-answer" id="answer645">qualify for the position</div>
+            </div>
+
+            <div class="question-block" data-number="646">
+                <div class="japanese-text">646. ビジネスにお金を投資する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer646')">答えを見る</button>
+                <div class="english-answer" id="answer646">invest money in a business</div>
+            </div>
+
+            <div class="question-block" data-number="647">
+                <div class="japanese-text">647. 彼の言うことを理解する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer647')">答えを見る</button>
+                <div class="english-answer" id="answer647">grasp what he is saying</div>
+            </div>
+
+            <div class="question-block" data-number="648">
+                <div class="japanese-text">648. 建物が崩壊した</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer648')">答えを見る</button>
+                <div class="english-answer" id="answer648">The building collapsed.</div>
+            </div>
+
+            <div class="question-block" data-number="649">
+                <div class="japanese-text">649. 事実を見逃す</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer649')">答えを見る</button>
+                <div class="english-answer" id="answer649">overlook the fact</div>
+            </div>
+
+            <div class="question-block" data-number="650">
+                <div class="japanese-text">650. 彼がうそをついたと非難する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer650')">答えを見る</button>
+                <div class="english-answer" id="answer650">accuse him of lying</div>
+            </div>
+
+            <div class="question-block" data-number="651">
+                <div class="japanese-text">651. 金がなくて欲求不満になる</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer651')">答えを見る</button>
+                <div class="english-answer" id="answer651">be frustrated by the lack of money</div>
+            </div>
+
+            <div class="question-block" data-number="652">
+                <div class="japanese-text">652. 彼からチャンスを奪う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer652')">答えを見る</button>
+                <div class="english-answer" id="answer652">deprive him of the chance</div>
+            </div>
+
+            <div class="question-block" data-number="653">
+                <div class="japanese-text">653. 驚異的な記憶力</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer653')">答えを見る</button>
+                <div class="english-answer" id="answer653">an astonishing memory</div>
+            </div>
+
+            <div class="question-block" data-number="654">
+                <div class="japanese-text">654. 新車を登録する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer654')">答えを見る</button>
+                <div class="english-answer" id="answer654">register a new car</div>
+            </div>
+
+            <div class="question-block" data-number="655">
+                <div class="japanese-text">655. その事実は私の理論と一致する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer655')">答えを見る</button>
+                <div class="english-answer" id="answer655">The fact corresponds to my theory.</div>
+            </div>
+
+            <div class="question-block" data-number="656">
+                <div class="japanese-text">656. 壁に影を投げかける</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer656')">答えを見る</button>
+                <div class="english-answer" id="answer656">cast a shadow on the wall</div>
+            </div>
+
+            <div class="question-block" data-number="657">
+                <div class="japanese-text">657. 成功は幸運のおかげだと思う</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer657')">答えを見る</button>
+                <div class="english-answer" id="answer657">attribute success to luck</div>
+            </div>
+
+            <div class="question-block" data-number="658">
+                <div class="japanese-text">658. 人権を無視する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer658')">答えを見る</button>
+                <div class="english-answer" id="answer658">neglect human rights</div>
+            </div>
+
+            <div class="question-block" data-number="659">
+                <div class="japanese-text">659. 飢えた子どもたちに食事を与える</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer659')">答えを見る</button>
+                <div class="english-answer" id="answer659">feed starving children</div>
+            </div>
+
+            <div class="question-block" data-number="660">
+                <div class="japanese-text">660. 意見の不一致を解決する</div>
+                <button class="answer-button" onclick="toggleAnswer(this, 'answer660')">答えを見る</button>
+                <div class="english-answer" id="answer660">resolve disagreements</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // 答えの表示/非表示を切り替える関数
+        function toggleAnswer(button, answerId) {
+            const answerElement = document.getElementById(answerId);
+            if (answerElement.style.display === 'none' || answerElement.style.display === '') {
+                answerElement.style.display = 'block';
+                button.textContent = '答えを隠す';
+            } else {
+                answerElement.style.display = 'none';
+                button.textContent = '答えを見る';
+            }
+        }
+
+        // 絞り込み機能を適用する関数
+        function applyFilter() {
+            const startNumInput = document.getElementById('startNum');
+            const endNumInput = document.getElementById('endNum');
+            const startNum = parseInt(startNumInput.value, 10);
+            const endNum = parseInt(endNumInput.value, 10);
+
+            const questionBlocks = document.querySelectorAll('.question-block');
+
+            questionBlocks.forEach(block => {
+                const dataNumber = parseInt(block.dataset.number, 10);
+                if (dataNumber >= startNum && dataNumber <= endNum) {
+                    block.style.display = 'block'; // 表示
+                } else {
+                    block.style.display = 'none'; // 非表示
+                }
+                // 答えが表示されている場合は非表示に戻す（オプション）
+                const answerElement = block.querySelector('.english-answer');
+                const answerButton = block.querySelector('.answer-button');
+                if (answerElement && answerButton) {
+                    answerElement.style.display = 'none';
+                    answerButton.textContent = '答えを見る';
+                }
+            });
+        }
+
+        // ページロード時にデフォルトで全単語を表示
+        document.addEventListener('DOMContentLoaded', () => {
+            applyFilter(); // 初期表示で全ての単語を表示する
+        });
+    </script>
+</body>
+</html>
